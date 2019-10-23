@@ -1,0 +1,21 @@
+body{
+
+    width : 768px;
+    margin: 0 auto;
+}
+img{
+    max-width : 200px;
+    max-height: 200px;
+
+}
+
+main > div {
+    width: 250px;
+    height: 250px;
+    border: 1px solid black;
+}
+
+main {
+    overflow: hidden;
+    width: 100%;
+}

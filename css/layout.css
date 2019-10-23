@@ -1,0 +1,14 @@
+main > div{
+    
+    float:left;
+
+}
+main div:nth-child(3n+2) {
+
+clear : left;
+
+}
+
+footer {
+    clear: both;
+}

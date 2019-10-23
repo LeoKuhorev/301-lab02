@@ -1,4 +1,5 @@
 'use strict';
+
 function Image(object) {
   this.title = object.title;
   this.url = object.image_url;
@@ -34,6 +35,7 @@ Image.prototype.render = function() {
   imageClone.find('img').attr('alt', this.keyword);
   imageClone.find('p').text(this.description);
   imageClone.removeClass('clone');
+  imageClone.addClass(this.keyword);
 };
 
 Image.loadImages = () => {
@@ -54,10 +56,14 @@ Image.loadOptions = () => {
 
 function filterImage() {
   let $selectEl = $(this).val();
-  $('h2').hide();
-  $('img').hide();
-  $('p').hide();
-  $(`img[alt="${$selectEl}"]`).show();
+  let $divEls = $('div');
+  $divEls.detach();
+  Image.allImages.forEach((element) => {
+    if($selectEl === element.keyword || $selectEl === 'default') {
+      element.render();
+    }
+  });
+  // $(`div[class="${$selectEl}"]`).show();
 }
 
 
