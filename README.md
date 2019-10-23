@@ -32,10 +32,22 @@ Actual time needed to complete: 45 min
 
 Estimate of time needed to complete: 1:00 - 1:30;
 
-Start time: _____
+Start time: 8:40 PM
 
-Finish time: _____
+Finish time: 9:30 PM*
 
-Actual time needed to complete: _____
+Actual time needed to complete: 50 min
+
+*at this point only basic layout is completed, additional styling applied on the next day
+
+**Number and name of feature: Sort the images**
+
+Estimate of time needed to complete: 0:30;
+
+Start time: 8:50 AM
+
+Finish time: 8:27 PM
+
+Actual time needed to complete: 45 min
 
 ## Learning Objectives
