@@ -8,7 +8,7 @@
 
 **Number and name of feature: Display images**
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete:  1:30;
 
 Start time: _____
 
@@ -19,7 +19,7 @@ Actual time needed to complete: _____
 
 **Number and name of feature: Filter images**
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1:00;
 
 Start time: _____
 
@@ -30,7 +30,7 @@ Actual time needed to complete: _____
 
 **Number and name of feature: Style the application**
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1:00 - 1:30;
 
 Start time: _____
 
