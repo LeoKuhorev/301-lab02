@@ -10,7 +10,7 @@
 
 Estimate of time needed to complete:  1:30;
 
-Start time: _____
+Start time: _6:35____
 
 Finish time: _____
 
