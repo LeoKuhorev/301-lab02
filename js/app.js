@@ -89,28 +89,34 @@ function sortImages() {
   // for(let i = 0; i < Image.renderedElements.length; i++) {
   //   renderedTitles.push(Image.allImages[Image.renderedElements[i]].title);
   // }
-  Image.renderedElements.sort();
-  let $selectEl = $(this).val();
-  if($selectEl === 'sort-ascending') {
-    removeAllImages();
-    renderedTitles.forEach(title => {
-      Image.allImages.forEach(element => {
-        if(title === element.title) {
-          element.render();
-        }
-      });
-    });
-  } else if ($selectEl === 'sort-descending') {
-    renderedTitles.reverse();
-    removeAllImages();
-    renderedTitles.forEach(title => {
-      Image.allImages.forEach(element => {
-        if(title === element.title) {
-          element.render();
-        }
-      });
-    });
-  }
+
+  const renderedTitles = Image.renderedElements.sort(() => {
+    Image.renderedElements.map(element => {return element.title;});
+  });
+  // let $selectEl = $(this).val();
+
+  console.table(renderedTitles);
+  renderedTitles.sort();
+  // if($selectEl === 'sort-ascending') {
+  //   removeAllImages();
+  //   renderedTitles.forEach(title => {
+  //     Image.allImages.forEach(element => {
+  //       if(title === element.title) {
+  //         element.render();
+  //       }
+  //     });
+  //   });
+  // } else if ($selectEl === 'sort-descending') {
+  //   renderedTitles.reverse();
+  //   removeAllImages();
+  //   renderedTitles.forEach(title => {
+  //     Image.allImages.forEach(element => {
+  //       if(title === element.title) {
+  //         element.render();
+  //       }
+  //     });
+  //   });
+  // }
 }
 
 // EXECUTING CODE ON PAGE LOAD
