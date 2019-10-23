@@ -9,8 +9,10 @@ function Image(object) {
 }
 
 Image.allImages = [];
+Image.renderedIndexes = [];
 Image.keywords = [];
 
+//get data from file, instantiate images
 Image.readJson = () => {
   $.getJSON('../data/page-1.json')
     .then(data => {
@@ -24,6 +26,7 @@ Image.readJson = () => {
     });
 };
 
+//render each individual picture to the screen
 Image.prototype.render = function() {
   $('main').append('<div class="clone"></div>');
   let imageClone = $('.clone');
@@ -35,44 +38,84 @@ Image.prototype.render = function() {
   imageClone.find('img').attr('alt', this.keyword);
   imageClone.find('p').text(this.description);
   imageClone.removeClass('clone');
-  imageClone.addClass(this.keyword);
+  imageClone.addClass(`image ${this.keyword}`);
 };
 
+//call render for every available image
 Image.loadImages = () => {
-  Image.allImages.forEach((element)=> element.render());
+  Image.renderedIndexes = [];
+  Image.allImages.forEach((element, idx) => {
+    element.render();
+    Image.renderedIndexes.push(idx);
+  });
 };
 
+//render each individual option element if keyword is unique
 Image.prototype.renderOption = function() {
   if (!Image.keywords.includes(this.keyword)){
     Image.keywords.push(this.keyword);
-    $('select').append(`<option value = ${this.keyword}>${this.keyword}</option>`);
+    $('select[class="keyword"]').append(`<option value = ${this.keyword}>${this.keyword}</option>`);
   }
 };
 
+//render all option elements
 Image.loadOptions = () => {
   Image.allImages.forEach((element) => element.renderOption());
-  $('select').on('change', filterImage);
+  $('select[class="keyword"]').on('change', filterImages);
 };
 
-function filterImage() {
+//filter rendered images basing on user selection
+function filterImages() {
   let $selectEl = $(this).val();
-  let $divEls = $('div');
-  $divEls.detach();
-  Image.allImages.forEach((element) => {
+  removeAllImages();
+  Image.renderedIndexes = [];
+  Image.allImages.forEach((element, idx) => {
     if($selectEl === element.keyword || $selectEl === 'default') {
       element.render();
+      Image.renderedIndexes.push(idx);
     }
   });
-  // $(`div[class="${$selectEl}"]`).show();
+  $('.sort').val('default');
 }
 
+function removeAllImages() {
+  let $divEls = $('.image');
+  $divEls.detach();
+}
 
+//sort images by title
+function sortImages() {
+  const renderedTitles = [];
+  for(let i = 0; i < Image.renderedIndexes.length; i++) {
+    renderedTitles.push(Image.allImages[Image.renderedIndexes[i]].title);
+  }
+  renderedTitles.sort();
+  console.table(renderedTitles);
+  let $selectEl = $(this).val();
+  if($selectEl === 'sort-ascending') {
+    removeAllImages();
+    renderedTitles.forEach(title => {
+      Image.allImages.forEach(element => {
+        if(title === element.title) {
+          element.render();
+        }
+      });
+    });
+  } else if ($selectEl === 'sort-descending') {
+    renderedTitles.reverse();
+    removeAllImages();
+    renderedTitles.forEach(title => {
+      Image.allImages.forEach(element => {
+        if(title === element.title) {
+          element.render();
+        }
+      });
+    });
+  }
+}
 
 // EXECUTING CODE ON PAGE LOAD
-
 $(() => {
   Image.readJson();
+  $('select[class="sort"]').on('change', sortImages);
 });
-
-
-
