@@ -1,0 +1,17 @@
+main > div{
+    float:left;
+
+}
+main div:nth-child(4),
+main div:nth-child(7),
+main div:nth-child(10),
+main div:nth-child(13)
+main div:nth-child(16){
+
+clear : left;
+
+}
+
+footer {
+    clear: both;
+}

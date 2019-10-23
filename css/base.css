@@ -1,0 +1,19 @@
+body{
+
+    width : 768px;
+    margin: 0 auto;
+}
+img{
+    width : 200px;
+    max-height: 200px;
+
+}
+
+main > div {
+    width: 250px;
+}
+
+main {
+    overflow: auto;
+    width: 100%;
+}
