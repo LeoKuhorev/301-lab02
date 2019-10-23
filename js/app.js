@@ -14,7 +14,7 @@ Image.keywords = [];
 
 //get data from file, instantiate images
 Image.readJson = () => {
-  $.getJSON('../data/page-1.json')
+  $.getJSON('./data/page-1.json')
     .then(data => {
       data.forEach(element => {
         Image.allImages.push(new Image(element));
@@ -90,7 +90,6 @@ function sortImages() {
     renderedTitles.push(Image.allImages[Image.renderedIndexes[i]].title);
   }
   renderedTitles.sort();
-  console.table(renderedTitles);
   let $selectEl = $(this).val();
   if($selectEl === 'sort-ascending') {
     removeAllImages();
