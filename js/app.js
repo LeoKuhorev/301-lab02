@@ -1,5 +1,5 @@
-/* eslint-disable semi */
 'use strict';
+
 function Image(object) {
   this.title = object.title;
   this.url = object.image_url;
@@ -62,7 +62,7 @@ function filterImage() {
     if($selectEl === element.keyword || $selectEl === 'default') {
       element.render();
     }
-  })
+  });
   // $(`div[class="${$selectEl}"]`).show();
 }
 
