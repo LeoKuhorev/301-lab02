@@ -12,9 +12,9 @@ Estimate of time needed to complete:  1:30;
 
 Start time: _6:35____
 
-Finish time: _____
+Finish time: _7:35___
 
-Actual time needed to complete: _____
+Actual time needed to complete: __1___
 
 
 **Number and name of feature: Filter images**

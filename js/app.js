@@ -1,10 +1,10 @@
 'use strict';
-function Image(url, title, description, keyword, horns) {
-  this.title = title;
-  this.url = url;
-  this.description = description;
-  this.keyword = keyword;
-  this.horns = horns;
+function Image(object) {
+  this.title = object.title;
+  this.url = object.image_url;
+  this.description = object.description;
+  this.keyword = object.keyword;
+  this.horns = object.horns;
 }
 
 Image.allImages = [];
@@ -15,15 +15,35 @@ Image.readJson = () => {
       data.forEach(element => {
         Image.allImages.push(new Image(element));
       });
-    },console.log('no JSON')
-    );
+    })
+    .then(()=>{
+      Image.loadImages();
+      console.table(Image.allImages);
+    });
+};
 
-  console.table(Image.allImages);
-  //.then(Imgae.loadImage);
+Image.prototype.render = function(){
+  $('main').append('<div class="clone"></div>');
+  let imageClone = $('.clone');
+
+  let imageHtml = $('#photo-template').html();
+
+  imageClone.html(imageHtml);
+
+  imageClone.find('h2').text(this.title);
+  imageClone.find('img').attr('src',this.url);
+  imageClone.find('p').text(this.description);
+  imageClone.removeClass('clone');
+};
+Image.loadImages = () => {
+  Image.allImages.forEach((element)=> element.render());
+console.log('Load iImage');
 };
 
 $(() => {
   Image.readJson();
   console.log('Hello');
 });
+
+
 
