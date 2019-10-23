@@ -9,7 +9,7 @@ function Image(object) {
 }
 
 Image.allImages = [];
-Image.renderedIndexes = [];
+Image.renderedElements = [];
 Image.keywords = [];
 
 //get data from file, instantiate images
@@ -43,10 +43,10 @@ Image.prototype.render = function() {
 
 //call render for every available image
 Image.loadImages = () => {
-  Image.renderedIndexes = [];
-  Image.allImages.forEach((element, idx) => {
+  Image.renderedElements = [];
+  Image.allImages.forEach((element) => {
     element.render();
-    Image.renderedIndexes.push(idx);
+    Image.renderedElements.push(element);
   });
 };
 
@@ -68,28 +68,28 @@ Image.loadOptions = () => {
 function filterImages() {
   let $selectEl = $(this).val();
   removeAllImages();
-  Image.renderedIndexes = [];
-  Image.allImages.forEach((element, idx) => {
+  Image.renderedElements = [];
+  Image.allImages.forEach((element) => {
     if($selectEl === element.keyword || $selectEl === 'default') {
       element.render();
-      Image.renderedIndexes.push(idx);
+      Image.renderedElements.push(element);
     }
   });
   $('.sort').val('default');
 }
 
 function removeAllImages() {
-  let $divEls = $('.image');
+  let $divEls = $('div.image');
   $divEls.detach();
 }
 
 //sort images by title
 function sortImages() {
-  const renderedTitles = [];
-  for(let i = 0; i < Image.renderedIndexes.length; i++) {
-    renderedTitles.push(Image.allImages[Image.renderedIndexes[i]].title);
-  }
-  renderedTitles.sort();
+  // const renderedTitles = [];
+  // for(let i = 0; i < Image.renderedElements.length; i++) {
+  //   renderedTitles.push(Image.allImages[Image.renderedElements[i]].title);
+  // }
+  Image.renderedElements.sort();
   let $selectEl = $(this).val();
   if($selectEl === 'sort-ascending') {
     removeAllImages();
