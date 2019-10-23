@@ -46,8 +46,8 @@ Estimate of time needed to complete: 0:30;
 
 Start time: 8:50 AM
 
-Finish time: 8:27 PM
+Finish time: 10:00 AM
 
-Actual time needed to complete: 45 min
+Actual time needed to complete: 1:10
 
 ## Learning Objectives

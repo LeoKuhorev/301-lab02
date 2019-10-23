@@ -1,0 +1,40 @@
+header {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 60px;
+  background: #00b894;
+  color: #2d3436;
+}
+
+header select {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+}
+
+main > div {
+  background: rgba(255, 234, 167,1.0);
+  border-radius: 5px;
+}
+
+main > div h2 {
+  font-size: 22px;
+  font-weight: 600;
+  height: 44px;
+}
+
+main > div img {
+  max-width : 220px;
+  max-height: 220px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+main > div p {
+  font-size: 18px;
+}
+
+footer {
+  font-size: 20px;
+  line-height: 50px;
+  background: #00b894;
+  color: #2d3436;
+}
