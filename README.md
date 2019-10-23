@@ -10,22 +10,22 @@
 
 Estimate of time needed to complete:  1:30;
 
-Start time: _6:35____
+Start time: 6:35 PM
 
-Finish time: _7:35___
+Finish time: 7:35PM
 
-Actual time needed to complete: __1___
+Actual time needed to complete: 1:00
 
 
 **Number and name of feature: Filter images**
 
 Estimate of time needed to complete: 1:00;
 
-Start time: _____
+Start time: 7:45 PM
 
-Finish time: _____
+Finish time: 8:27 PM
 
-Actual time needed to complete: _____
+Actual time needed to complete: 45 min
 
 
 **Number and name of feature: Style the application**

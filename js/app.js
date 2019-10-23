@@ -8,6 +8,7 @@ function Image(object) {
 }
 
 Image.allImages = [];
+Image.keywords = [];
 
 Image.readJson = () => {
   $.getJSON('../data/page-1.json')
@@ -16,33 +17,55 @@ Image.readJson = () => {
         Image.allImages.push(new Image(element));
       });
     })
-    .then(()=>{
+    .then(() => {
       Image.loadImages();
-      console.table(Image.allImages);
+      Image.loadOptions();
     });
 };
 
-Image.prototype.render = function(){
+Image.prototype.render = function() {
   $('main').append('<div class="clone"></div>');
   let imageClone = $('.clone');
-
   let imageHtml = $('#photo-template').html();
 
   imageClone.html(imageHtml);
-
   imageClone.find('h2').text(this.title);
-  imageClone.find('img').attr('src',this.url);
+  imageClone.find('img').attr('src', this.url);
+  imageClone.find('img').attr('alt', this.keyword);
   imageClone.find('p').text(this.description);
   imageClone.removeClass('clone');
 };
+
 Image.loadImages = () => {
   Image.allImages.forEach((element)=> element.render());
-console.log('Load iImage');
 };
+
+Image.prototype.renderOption = function() {
+  if (!Image.keywords.includes(this.keyword)){
+    Image.keywords.push(this.keyword);
+    $('select').append(`<option value = ${this.keyword}>${this.keyword}</option>`);
+  }
+};
+
+Image.loadOptions = () => {
+  Image.allImages.forEach((element) => element.renderOption());
+  $('select').on('change', filterImage);
+};
+
+function filterImage() {
+  let $selectEl = $(this).val();
+  $('h2').hide();
+  $('img').hide();
+  $('p').hide();
+  $(`img[alt="${$selectEl}"]`).show();
+}
+
+
+
+// EXECUTING CODE ON PAGE LOAD
 
 $(() => {
   Image.readJson();
-  console.log('Hello');
 });
 
 
