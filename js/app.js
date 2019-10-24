@@ -39,6 +39,7 @@ Image.prototype.render = function() {
   imageClone.find('p:not(.horns)').text(this.description);
   imageClone.removeClass('clone');
   imageClone.addClass(`image ${this.keyword}`);
+  imageClone.on('click', imgZoom);
 
   Image.renderedElements.push(this);
 };
@@ -82,6 +83,12 @@ function removeAllImages() {
   let $divEls = $('div.image');
   $divEls.detach();
   Image.renderedElements = [];
+}
+
+function imgZoom() {
+  let imgEl = $(this).find('img');
+  console.log('Image Zoom function invokes', imgEl);
+  //TODO: modal zoom image
 }
 
 //sort images by title or number of horns

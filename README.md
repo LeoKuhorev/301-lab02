@@ -82,9 +82,9 @@ Estimate of time needed to complete: 1:00
 
 Start time: 11:30 AM
 
-Finish time: 
+Finish time: 11:55 AM
 
-Actual time needed to complete: 
+Actual time needed to complete: 25 min
 
 
 **Number and name of feature: Sort the images**
@@ -102,7 +102,7 @@ Actual time needed to complete: 2:00
 
 **Number and name of feature: Detail view**
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1:00
 
 Start time: 
 

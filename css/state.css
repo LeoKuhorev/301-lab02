@@ -1,4 +1,4 @@
-main > div:hover {
+.image:hover {
   background: #ffe285;
   transition: 400ms;
 }

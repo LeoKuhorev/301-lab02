@@ -17,4 +17,6 @@ main {
 main > div {
   width: 280px;
   min-height: 400px;
+  user-select: none;
+  cursor: pointer;
 }
