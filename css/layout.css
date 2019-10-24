@@ -2,7 +2,7 @@ header {
   text-align: center;
   height: 150px;
   width: 100%;
-  min-width: 960px;
+  min-width: 640px;
 }
 
 header h1 {
@@ -16,14 +16,10 @@ main > div {
   padding: 10px;
 }
 
-main div:nth-child(3n+2) {
-  clear: left;
-}
-
 footer {
   clear: both;
   text-align: center;
   height: 50px;
   width: 100%;
-  min-width: 960px;
+  min-width: 640px;
 }

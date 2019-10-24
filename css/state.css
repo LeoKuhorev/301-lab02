@@ -2,3 +2,21 @@ main > div:hover {
   background: #ffe285;
   transition: 400ms;
 }
+
+@media screen and (max-width: 959px) {
+  main div:nth-child(2n+2) {
+    clear: left;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  main {
+    width: 960px;
+  }
+  header, footer {
+    min-width: 640px;
+  }
+  main div:nth-child(3n+2) {
+    clear: left;
+  }
+}

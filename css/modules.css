@@ -13,6 +13,11 @@ header select {
 main > div {
   background: rgba(255, 234, 167, 1.0);
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 main > div h2 {

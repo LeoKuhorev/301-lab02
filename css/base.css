@@ -9,12 +9,12 @@ body {
 
 main {
   min-height: calc(100vh - 200px);
-  width: 960px;
+  width: 640px;
   margin: 0 auto;
   overflow: hidden;
 }
 
 main > div {
   width: 280px;
-  min-height: 350px;
+  min-height: 400px;
 }
