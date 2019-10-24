@@ -9,7 +9,6 @@ function Image(object) {
 }
 
 Image.allImages = [];
-Image.renderedIndexes = [];
 Image.keywords = [];
 
 //get data from file, instantiate images
@@ -36,17 +35,19 @@ Image.prototype.render = function() {
   imageClone.find('h2').text(this.title);
   imageClone.find('img').attr('src', this.url);
   imageClone.find('img').attr('alt', this.keyword);
-  imageClone.find('p').text(this.description);
+  imageClone.find('p.horns').text(`Horns: ${this.horns}`);
+  imageClone.find('p:not(.horns)').text(this.description);
   imageClone.removeClass('clone');
   imageClone.addClass(`image ${this.keyword}`);
+
+  Image.renderedElements.push(this);
 };
 
 //call render for every available image
 Image.loadImages = () => {
-  Image.renderedIndexes = [];
-  Image.allImages.forEach((element, idx) => {
+  Image.renderedElements = [];
+  Image.allImages.forEach((element) => {
     element.render();
-    Image.renderedIndexes.push(idx);
   });
 };
 
@@ -68,30 +69,39 @@ Image.loadOptions = () => {
 function filterImages() {
   let $selectEl = $(this).val();
   removeAllImages();
-  Image.renderedIndexes = [];
-  Image.allImages.forEach((element, idx) => {
+  Image.allImages.forEach((element) => {
     if($selectEl === element.keyword || $selectEl === 'default') {
       element.render();
-      Image.renderedIndexes.push(idx);
     }
   });
   $('.sort').val('default');
 }
 
+//remove all images and renderElements array
 function removeAllImages() {
-  let $divEls = $('.image');
+  let $divEls = $('div.image');
   $divEls.detach();
+  Image.renderedElements = [];
 }
 
-//sort images by title
+//sort images by title or number of horns
 function sortImages() {
-  const renderedTitles = [];
-  for(let i = 0; i < Image.renderedIndexes.length; i++) {
-    renderedTitles.push(Image.allImages[Image.renderedIndexes[i]].title);
-  }
-  renderedTitles.sort();
   let $selectEl = $(this).val();
-  if($selectEl === 'sort-ascending') {
+
+  //get titles and horns of rendered images sorted ascending
+  const renderedTitles = Image.renderedElements.map(element => element.title).sort();
+  const renderedHorns = Image.renderedElements.map(element => element.horns).sort((a, b) => a - b);
+
+  //if sort descending selected - reverse values
+  if($selectEl === 'sort-descending') {
+    renderedTitles.reverse();
+  } else if($selectEl === 'sort-high-to-low') {
+    renderedHorns.sort((a, b) => b - a);
+  }
+
+  //render elements basing on user selection
+  if ($selectEl === 'sort-ascending'
+  || $selectEl === 'sort-descending') {
     removeAllImages();
     renderedTitles.forEach(title => {
       Image.allImages.forEach(element => {
@@ -100,12 +110,20 @@ function sortImages() {
         }
       });
     });
-  } else if ($selectEl === 'sort-descending') {
-    renderedTitles.reverse();
+  } else if ($selectEl === 'sort-low-to-high'
+  || $selectEl === 'sort-high-to-low') {
+    const tmpRenderedElenemts = Image.renderedElements;
+    //get unique number of horns
+    const uniqueHorns = [renderedHorns[0]];
+    for (let i = 1; i < renderedHorns.length; i++) {
+      if(renderedHorns[i] !== renderedHorns[i-1]) {
+        uniqueHorns.push(renderedHorns[i]);
+      }
+    }
     removeAllImages();
-    renderedTitles.forEach(title => {
-      Image.allImages.forEach(element => {
-        if(title === element.title) {
+    uniqueHorns.forEach(horn => {
+      tmpRenderedElenemts.forEach(element => {
+        if(horn === element.horns) {
           element.render();
         }
       });
