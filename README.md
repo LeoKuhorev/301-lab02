@@ -51,3 +51,8 @@ Finish time: 10:00 AM
 Actual time needed to complete: 1:10
 
 ## Learning Objectives
+
+
+
+**CREDITS:**
+(Sort Unique)[https://stackoverflow.com/questions/4833651/javascript-array-sort-and-unique]
