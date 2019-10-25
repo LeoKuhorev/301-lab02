@@ -99,9 +99,36 @@ function filterImages() {
 }
 
 function imgZoom() {
-  let imgEl = $(this).find('img');
-  console.log('Image Zoom function invokes', imgEl);
-  //TODO: modal zoom image
+  //find object for current picture
+  let imgSrc = $(this).find('img').attr('src');
+  let thisObject;
+  Image.allImages.forEach(element => {
+    if(imgSrc === element.image_url) {
+      thisObject = element;
+    }
+  });
+
+  //render modal
+  $('.modal').remove();
+  let $divEl = $('<div class="modal">');
+  let templateScript = $('#modal').html();
+  let template = Handlebars.compile(templateScript);
+  let templateHTML = template(thisObject);
+  $divEl.html(templateHTML);
+  $('body').append($divEl);
+
+  //close modal when clicked on close or outside of it's content
+  $('.close').on('click', e => {
+    if (e.target.className === 'close') {
+      $divEl.fadeOut(300);
+    }
+  });
+
+  $(window).on('click', e => {
+    if (e.target.className === 'modal') {
+      $divEl.fadeOut(300);
+    }
+  });
 }
 
 //sort images by title or number of horns
