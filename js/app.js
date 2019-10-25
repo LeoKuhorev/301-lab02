@@ -109,8 +109,14 @@ function sortImages() {
   //render elements basing on user selection
   if ($selectEl === 'sort-ascending'
   || $selectEl === 'sort-descending') {
+    const uniqueTitles = [renderedTitles[0]];
+    for (let i = 1; i < renderedTitles.length; i++) {
+      if(renderedTitles[i] !== renderedTitles[i-1]) {
+        uniqueTitles.push(renderedTitles[i]);
+      }
+    }
     removeAllImages();
-    renderedTitles.forEach(title => {
+    uniqueTitles.forEach(title => {
       Image.allImages.forEach(element => {
         if(title === element.title) {
           element.render();
