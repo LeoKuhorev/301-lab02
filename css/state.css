@@ -33,11 +33,15 @@
 }
 
 @media screen and (min-width: 960px) {
+  header, footer {
+    min-width: 960px;
+  }
+  nav {
+    min-width: 800px;
+    justify-content: space-between;
+  }
   main {
     width: 960px;
-  }
-  header, footer {
-    min-width: 640px;
   }
   main div:nth-child(3n+1) {
     clear: left;
