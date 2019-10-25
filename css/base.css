@@ -10,7 +10,7 @@ body {
 main {
   min-height: calc(100vh - 200px);
   width: 640px;
-  margin: 0 auto;
+  margin: 2% auto;
   overflow: hidden;
 }
 

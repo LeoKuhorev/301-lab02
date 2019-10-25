@@ -33,6 +33,7 @@
       </nav>
     </header>
     <main>
+      <!-- IMAGES ARE RENDERED HERE -->
     </main>
     <footer>
       &copy; 2019 Code Fellows
@@ -42,8 +43,19 @@
       <h2>{{title}}</h2>
       <img src={{image_url}} alt={{keyword}} class={{keyword}}>
       <div>
-        <p class="horns">horns: {{horns}}</p>
+        <p class="horns">Horns: {{horns}}</p>
         <p>{{description}}</p>
+      </div>
+    </script>
+    <script id="modal" type ="text/x-handlebars-template">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>{{title}}</h2>
+        <img src={{image_url}} alt={{keyword}} class={{keyword}}>
+        <div>
+          <p class="horns">Horns: {{horns}}</p>
+          <p>{{description}}</p>
+        </div>
       </div>
     </script>
   </body>
