@@ -1,5 +1,8 @@
 'use strict';
 
+const page1 = './data/page-1.json';
+const page2 = './data/page-2.json';
+
 function Image(object) {
   this.title = object.title;
   this.url = object.image_url;
@@ -9,19 +12,22 @@ function Image(object) {
 }
 
 Image.allImages = [];
-Image.keywords = [];
+//Image.keywords = [];
 
 //get data from file, instantiate images
-Image.readJson = () => {
-  $.getJSON('./data/page-1.json')
+Image.readJson = (json) => {
+  $.getJSON(json)
     .then(data => {
+      Image.allImages=[];
       data.forEach(element => {
         Image.allImages.push(new Image(element));
       });
     })
     .then(() => {
       Image.loadImages();
+      console.log('we are here');
       Image.loadOptions();
+
     });
 };
 
@@ -46,6 +52,7 @@ Image.prototype.render = function() {
 
 //call render for every available image
 Image.loadImages = () => {
+  removeAllImages();
   Image.renderedElements = [];
   Image.allImages.forEach((element) => {
     element.render();
@@ -62,8 +69,12 @@ Image.prototype.renderOption = function() {
 
 //render all option elements
 Image.loadOptions = () => {
+  $('.keyword').children().slice(1).remove();
+  Image.keywords = [];
+
   Image.allImages.forEach((element) => element.renderOption());
   $('select[class="keyword"]').on('change', filterImages);
+  console.log('we are here2');
 };
 
 //filter rendered images basing on user selection
@@ -140,6 +151,8 @@ function sortImages() {
 
 // EXECUTING CODE ON PAGE LOAD
 $(() => {
-  Image.readJson();
+  Image.readJson(page1);
   $('select[class="sort"]').on('change', sortImages);
+  $('#page1').on('click',function(){Image.readJson(page1);});
+  $('#page2').on('click',function(){Image.readJson(page2);});
 });
