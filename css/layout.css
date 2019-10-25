@@ -12,7 +12,7 @@ header h1 {
   padding-top: 10px;
 }
 
-nav {
+nav, nav > div {
   height: 50px;
   display: flex;
 }
