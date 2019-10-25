@@ -1,12 +1,30 @@
 header {
-  text-align: center;
-  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 150px;
   width: 100%;
   min-width: 640px;
 }
 
 header h1 {
   padding-top: 10px;
+}
+
+nav {
+  height: 50px;
+  display: flex;
+}
+
+nav img {
+  width: 50px;
+  cursor: pointer;
+}
+
+nav select {
+  margin: 0 5px;
+  border-radius: 5px;
 }
 
 main > div {

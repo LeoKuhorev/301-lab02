@@ -1,41 +1,42 @@
 'use strict';
 
-const page1 = './data/page-1.json';
-const page2 = './data/page-2.json';
+// ***GLOBAL VARIABLES***
+const pageOne = './data/page-1.json';
+const pageTwo = './data/page-2.json';
 
+// ***CONSTRUCTOR FUNCTION***
 function Image(object) {
-  for(let key in object){
-    this[key] =object[key];
+  for(let key in object) {
+    this[key] = object[key];
   }
 }
 
-Image.allImages = [];
-
-//get data from file, instantiate images
+//get data from file, instantiate objects, render images
 Image.readJson = (json) => {
   $.getJSON(json)
     .then(data => {
-      Image.allImages=[];
+      Image.allImages = [];
       data.forEach(element => {
         Image.allImages.push(new Image(element));
       });
     })
     .then(() => {
       Image.loadImages();
-      console.log('we are here');
       Image.loadOptions();
-
     });
 };
 
-//render each individual picture to the screen
+//render each individual picture to the screen from a template
 Image.prototype.render = function() {
   let divEl = $('<div class = "image"></div>');
   $('main').append(divEl);
-  var templateScript = $('#template').html();
+
+  let templateScript = $('#template').html();
   let template = Handlebars.compile(templateScript);
   let templateHTML = template(this);
   divEl.html(templateHTML);
+  divEl.on('click', imgZoom);
+
   Image.renderedElements.push(this);
 };
 
@@ -63,9 +64,28 @@ Image.loadOptions = () => {
 
   Image.allImages.forEach((element) => element.renderOption());
   $('select[class="keyword"]').on('change', filterImages);
-  console.log('we are here2');
 };
 
+// ***HELPER FUNCTIONS***
+//remove all images and renderElements array
+function removeAllImages() {
+  let $divEls = $('div.image');
+  $divEls.detach();
+  Image.renderedElements = [];
+}
+
+//getting only unique elements from a sorted array
+function getUnique(sortedArray) {
+  const uniqueArray = [sortedArray[0]];
+  for (let i = 1; i < sortedArray.length; i++) {
+    if(sortedArray[i] !== sortedArray[i-1]) {
+      uniqueArray.push(sortedArray[i]);
+    }
+  }
+  return uniqueArray;
+}
+
+// ***EVENT HANDLERS***
 //filter rendered images basing on user selection
 function filterImages() {
   let $selectEl = $(this).val();
@@ -76,13 +96,6 @@ function filterImages() {
     }
   });
   $('.sort').val('default');
-}
-
-//remove all images and renderElements array
-function removeAllImages() {
-  let $divEls = $('div.image');
-  $divEls.detach();
-  Image.renderedElements = [];
 }
 
 function imgZoom() {
@@ -109,12 +122,7 @@ function sortImages() {
   //render elements basing on user selection
   if ($selectEl === 'sort-ascending'
   || $selectEl === 'sort-descending') {
-    const uniqueTitles = [renderedTitles[0]];
-    for (let i = 1; i < renderedTitles.length; i++) {
-      if(renderedTitles[i] !== renderedTitles[i-1]) {
-        uniqueTitles.push(renderedTitles[i]);
-      }
-    }
+    const uniqueTitles = getUnique(renderedTitles);
     removeAllImages();
     uniqueTitles.forEach(title => {
       Image.allImages.forEach(element => {
@@ -126,13 +134,7 @@ function sortImages() {
   } else if ($selectEl === 'sort-low-to-high'
   || $selectEl === 'sort-high-to-low') {
     const tmpRenderedElenemts = Image.renderedElements;
-    //get unique number of horns
-    const uniqueHorns = [renderedHorns[0]];
-    for (let i = 1; i < renderedHorns.length; i++) {
-      if(renderedHorns[i] !== renderedHorns[i-1]) {
-        uniqueHorns.push(renderedHorns[i]);
-      }
-    }
+    const uniqueHorns = getUnique(renderedHorns);
     removeAllImages();
     uniqueHorns.forEach(horn => {
       tmpRenderedElenemts.forEach(element => {
@@ -144,16 +146,18 @@ function sortImages() {
   }
 }
 
-// EXECUTING CODE ON PAGE LOAD
+//***EXECUTING CODE ON PAGE LOAD***
 $(() => {
-  Image.readJson(page1);
+  Image.readJson(pageOne);
   $('select[class="sort"]').on('change', sortImages);
-  $('#page1').on('click',function(){
-    Image.readJson(page1);
+
+  $('#page-one').on('click', function(){
+    Image.readJson(pageOne);
     $('.sort').val('default');
   });
-  $('#page2').on('click',function(){
-    Image.readJson(page2);
+
+  $('#page-two').on('click', function(){
+    Image.readJson(pageTwo);
     $('.sort').val('default');
   });
 });

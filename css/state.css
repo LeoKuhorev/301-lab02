@@ -1,3 +1,26 @@
+
+#page-one, #page-two {
+  transition: 200ms ease-in;
+}
+
+#page-one:hover {
+  transform: translateX(-5px);
+}
+
+#page-one:active {
+  transform: translate(-5px, 2px);
+  transition: 100ms;
+}
+
+#page-two:hover {
+  transform: translateX(5px);
+}
+
+#page-two:active {
+  transform: translate(5px, 2px);
+  transition: 100ms;
+}
+
 .image:hover {
   background: #ffe285;
   transition: 400ms;
