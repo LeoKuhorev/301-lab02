@@ -148,6 +148,12 @@ function sortImages() {
 $(() => {
   Image.readJson(page1);
   $('select[class="sort"]').on('change', sortImages);
-  $('#page1').on('click',function(){Image.readJson(page1);});
-  $('#page2').on('click',function(){Image.readJson(page2);});
+  $('#page1').on('click',function(){
+    Image.readJson(page1);
+    $('.sort').val('default');
+  });
+  $('#page2').on('click',function(){
+    Image.readJson(page2);
+    $('.sort').val('default');
+  });
 });
