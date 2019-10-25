@@ -4,15 +4,12 @@ const page1 = './data/page-1.json';
 const page2 = './data/page-2.json';
 
 function Image(object) {
-  this.title = object.title;
-  this.url = object.image_url;
-  this.description = object.description;
-  this.keyword = object.keyword;
-  this.horns = object.horns;
+  for(let key in object){
+    this[key] =object[key];
+  }
 }
 
 Image.allImages = [];
-//Image.keywords = [];
 
 //get data from file, instantiate images
 Image.readJson = (json) => {
@@ -33,20 +30,12 @@ Image.readJson = (json) => {
 
 //render each individual picture to the screen
 Image.prototype.render = function() {
-  $('main').append('<div class="clone"></div>');
-  let imageClone = $('.clone');
-  let imageHtml = $('#photo-template').html();
-
-  imageClone.html(imageHtml);
-  imageClone.find('h2').text(this.title);
-  imageClone.find('img').attr('src', this.url);
-  imageClone.find('img').attr('alt', this.keyword);
-  imageClone.find('p.horns').text(`Horns: ${this.horns}`);
-  imageClone.find('p:not(.horns)').text(this.description);
-  imageClone.removeClass('clone');
-  imageClone.addClass(`image ${this.keyword}`);
-  imageClone.on('click', imgZoom);
-
+  let divEl = $('<div class = "image"></div>');
+  $('main').append(divEl);
+  var templateScript = $('#template').html();
+  let template = Handlebars.compile(templateScript);
+  let templateHTML = template(this);
+  divEl.html(templateHTML);
   Image.renderedElements.push(this);
 };
 

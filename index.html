@@ -29,18 +29,18 @@
       <button id = "page2">Page2</button>
     </header>
     <main>
-      <section id="photo-template">
-        <h2></h2>
-        <img src="" alt="">
-        <div>
-          <p class="horns"></p>
-          <p></p>
-        </div>
-      </section>
     </main>
     <footer>
       &copy; 2019 Code Fellows
     </footer>
     <script src="./js/app.js"></script>
+    <script id="template" type ="text/x-handlebars-template">
+      <h2>{{title}}</h2>
+      <img src={{image_url}} alt={{keyword}} class={{keyword}}>
+      <div>
+        <p class="horns">horns: {{horns}}</p>
+        <p>{{description}}</p>
+      </div>
+    </script>
   </body>
 </html>
