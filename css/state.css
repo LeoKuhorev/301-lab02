@@ -4,7 +4,7 @@
 }
 
 @media screen and (max-width: 959px) {
-  main div:nth-child(2n+2) {
+  main div:nth-child(2n+1) {
     clear: left;
   }
 }
@@ -16,7 +16,7 @@
   header, footer {
     min-width: 640px;
   }
-  main div:nth-child(3n+2) {
+  main div:nth-child(3n+1) {
     clear: left;
   }
 }
