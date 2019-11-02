@@ -19,6 +19,7 @@ Image.readJson = (json) => {
       data.forEach(element => {
         Image.allImages.push(new Image(element));
       });
+      Image.allImages = Image.allImages.sort( (a, b) => (a.title > b.title) ? 1 : (a.title < b.title) ? -1 : 0);
     })
     .then(() => {
       Image.loadImages();
